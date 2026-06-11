@@ -24,6 +24,7 @@ coverage/
 *.test
 *.out
 bin/
+.gocache/
 
 # Logs
 *.log
@@ -45,4 +46,3 @@ temp/
 *.swo
 .DS_Store
 Thumbs.db
-
