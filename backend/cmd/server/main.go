@@ -61,10 +61,14 @@ func main() {
 	// CORS Configuration (Allow Frontend to communicate with Backend)
 	frontendURL := os.Getenv("FRONTEND_URL")
 	if frontendURL == "" {
-		frontendURL = "http://localhost:5173" // Vite default
+		log.Println("Warning: FRONTEND_URL is not set; only *.vercel.app origins will be allowed")
+	}
+	allowedOrigins := []string{"https://*.vercel.app"}
+	if frontendURL != "" {
+		allowedOrigins = append(allowedOrigins, frontendURL)
 	}
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{frontendURL, "https://*.vercel.app"},
+		AllowedOrigins:   allowedOrigins,
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
@@ -114,7 +118,7 @@ func main() {
 	}
 
 	go func() {
-		log.Printf("🚀 Server is running on http://localhost:%s", port)
+		log.Printf("🚀 Server is listening on port %s", port)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("ListenAndServe error: %v", err)
 		}

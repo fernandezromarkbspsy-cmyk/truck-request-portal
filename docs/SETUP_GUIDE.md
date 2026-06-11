@@ -65,7 +65,7 @@ If you prefer to work on your own computer, use these specific "User-Level" or "
 3. Choose **"Email & Username"** for sign-in options (Username will be used for Backroom Ops ID).
 4. Go to **API Keys** in the left sidebar.
 5. Copy the **Publishable Key** (for Frontend) and **Secret Key** (for Backend).
-6. *(Later Step)*: Go to **Webhooks**, add an endpoint `https://your-domain.com/api/v1/users/webhook`, and select `user.created` and `user.updated` events.
+6. Go to **Webhooks**, add an endpoint using your deployed API domain, for example `https://api.your-domain.com/api/v1/users/webhook`, and select `user.created` and `user.updated` events.
 
 ### D. Resend (Email Service)
 1. Go to [resend.com](https://resend.com) and sign up.
@@ -77,8 +77,8 @@ If you prefer to work on your own computer, use these specific "User-Level" or "
 1. Go to [vercel.com](https://vercel.com) and sign up **using your GitHub account**.
 2. Click **"Add New Project"**.
 3. Select your `truck-request-portal` GitHub repository and click **"Import"**.
-4. In the "Environment Variables" section, paste all your `VITE_...` variables from your `.env` file.
-5. Click **"Deploy"**. Vercel will give you a live `.vercel.app` URL.
+4. In the "Environment Variables" section, paste all your `VITE_...` variables from your `.env` file. `VITE_API_URL` must point to the deployed backend API, for example `https://api.your-domain.com/api/v1`.
+5. Click **"Deploy"**. Vercel will give you a `.vercel.app` URL; if you already have DNS configured, use your custom domain as the production frontend URL.
 
 ### F. Cloudflare (DNS & CDN)
 1. Go to [cloudflare.com](https://cloudflare.com) and sign up.
@@ -86,7 +86,7 @@ If you prefer to work on your own computer, use these specific "User-Level" or "
 3. Cloudflare will scan your DNS records. Click **"Continue"**.
 4. Cloudflare will give you two **Nameservers** (e.g., `bob.ns.cloudflare.com`).
 5. Go to your **Namecheap** dashboard > Domain List > Manage > Nameservers > Select "Custom DNS" and paste the two Cloudflare nameservers.
-6. Back in Cloudflare, go to **DNS > Records** and add the `CNAME` and `A` records that Vercel provided you in Step E.
+6. Back in Cloudflare, go to **DNS > Records** and add the `CNAME` and `A` records provided by Vercel and your backend host. Set backend `FRONTEND_URL` to your production frontend domain, for example `https://your-domain.com`.
 
 ### G. PostHog (Analytics)
 1. Go to [posthog.com](https://posthog.com) and sign up.
@@ -102,7 +102,7 @@ If you prefer to work on your own computer, use these specific "User-Level" or "
 ### I. Better Stack (Uptime Monitoring)
 1. Go to [betterstack.com](https://betterstack.com) and sign up.
 2. Create a new **Monitor**.
-3. Enter your Vercel deployment URL (e.g., `https://truck-portal.vercel.app`).
+3. Enter your production frontend URL, preferably your custom DNS domain.
 4. Set the check frequency to 3 minutes and add your email for alerts.
 
 ### J. Pinecone (Vector DB - For Advanced Search in Phase 3)
