@@ -1,0 +1,48 @@
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Dependencies
+node_modules/
+
+# Frontend builds and caches
+dist/
+build/
+.vite/
+.next/
+.nuxt/
+.svelte-kit/
+coverage/
+
+# Go build outputs
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+bin/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime and temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
